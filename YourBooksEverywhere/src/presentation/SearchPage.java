@@ -6,7 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
+import java.util.ArrayList;
+
 import javax.swing.table.DefaultTableModel;
+
+import dao.Book;
+
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.Font;
@@ -19,11 +24,12 @@ public class SearchPage {
 
 	private JFrame frame;
 	private JTable table;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void newScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -48,6 +54,7 @@ public class SearchPage {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 511, 376);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -96,5 +103,20 @@ public class SearchPage {
 		txtrSearchForYour.setText("Search for your favorite books:");
 		txtrSearchForYour.setBounds(43, 22, 313, 22);
 		frame.getContentPane().add(txtrSearchForYour);
+		
+		textField = new JTextField();
+		textField.setBounds(164, 68, 185, 20);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JTextArea txtrSearchForBooks = new JTextArea();
+		txtrSearchForBooks.setEditable(false);
+		txtrSearchForBooks.setFont(new Font("Dialog", Font.PLAIN, 13));
+		txtrSearchForBooks.setBackground(SystemColor.control);
+		txtrSearchForBooks.setText("Search for books:");
+		txtrSearchForBooks.setBounds(48, 66, 106, 22);
+		frame.getContentPane().add(txtrSearchForBooks);
 	}
+	
+
 }

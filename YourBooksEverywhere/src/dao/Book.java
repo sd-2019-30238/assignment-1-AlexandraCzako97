@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 import java.sql.Date;
 
@@ -8,6 +8,13 @@ public class Book {
 	private String author;
 	private String genre;
 	private Date release_date;
+	public Book(int bookId, String title, String author, String genre, Date release_date) {
+		this.bookId=bookId;
+		this.title=title;
+		this.author=author;
+		this.genre=genre;
+		this.release_date=release_date;
+	}
 	public int getBookId() {
 		return bookId;
 	}
