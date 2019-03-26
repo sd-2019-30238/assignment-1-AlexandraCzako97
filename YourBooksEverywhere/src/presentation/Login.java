@@ -51,6 +51,7 @@ public class Login {
 		frmLogin.getContentPane().setLayout(null);
 		
 		JTextPane txtpnYourBooksEverywhere = new JTextPane();
+		txtpnYourBooksEverywhere.setEditable(false);
 		txtpnYourBooksEverywhere.setFont(new Font("Tekton Pro", Font.PLAIN, 26));
 		txtpnYourBooksEverywhere.setBackground(SystemColor.control);
 		txtpnYourBooksEverywhere.setText("Your books everywhere!");
@@ -68,6 +69,7 @@ public class Login {
 		frmLogin.getContentPane().add(textField_1);
 		
 		JTextArea txtrUsername = new JTextArea();
+		txtrUsername.setEditable(false);
 		txtrUsername.setFont(new Font("Dialog", Font.PLAIN, 15));
 		txtrUsername.setBackground(SystemColor.control);
 		txtrUsername.setText("Username:");
@@ -75,6 +77,7 @@ public class Login {
 		frmLogin.getContentPane().add(txtrUsername);
 		
 		txtrPassword = new JTextArea();
+		txtrPassword.setEditable(false);
 		txtrPassword.setText("Password:");
 		txtrPassword.setFont(new Font("Dialog", Font.PLAIN, 15));
 		txtrPassword.setBackground(SystemColor.menu);
@@ -92,10 +95,17 @@ public class Login {
 		frmLogin.getContentPane().add(btnRegister);
 		
 		JTextArea txtrLoginRegisterFor = new JTextArea();
+		txtrLoginRegisterFor.setEditable(false);
 		txtrLoginRegisterFor.setFont(new Font("Dialog", Font.PLAIN, 18));
 		txtrLoginRegisterFor.setBackground(SystemColor.control);
 		txtrLoginRegisterFor.setText("Login/ register for an awesome experience!");
 		txtrLoginRegisterFor.setBounds(65, 106, 348, 37);
 		frmLogin.getContentPane().add(txtrLoginRegisterFor);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.setBackground(SystemColor.control);
+		textArea.setBounds(115, 305, 241, 22);
+		frmLogin.getContentPane().add(textArea);
 	}
 }
