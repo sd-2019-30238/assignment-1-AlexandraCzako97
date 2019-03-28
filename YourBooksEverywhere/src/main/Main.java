@@ -1,7 +1,7 @@
 package main;
 
 import java.sql.SQLException;
-import presentation.Login;
+import presentation.LoginPage;
 import dao.DBconnector;
 import dao.User;
 import dao.UserDao;

@@ -14,10 +14,10 @@ import java.awt.event.ActionEvent;
 public class AdminPage {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
 	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
 
 	/**
 	 * Launch the application.
@@ -59,52 +59,20 @@ public class AdminPage {
 		txtrHelloAdmin.setBounds(10, 11, 143, 37);
 		frame.getContentPane().add(txtrHelloAdmin);
 		
-		textField = new JTextField();
-		textField.setBounds(144, 59, 190, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(144, 90, 190, 20);
-		frame.getContentPane().add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(144, 121, 190, 20);
-		frame.getContentPane().add(textField_2);
-		
-		JTextArea txtrUsername = new JTextArea();
-		txtrUsername.setFont(new Font("Dialog", Font.PLAIN, 13));
-		txtrUsername.setBackground(SystemColor.control);
-		txtrUsername.setText("Username:");
-		txtrUsername.setBounds(20, 59, 112, 22);
-		frame.getContentPane().add(txtrUsername);
-		
-		JTextArea txtrPassword = new JTextArea();
-		txtrPassword.setFont(new Font("Dialog", Font.PLAIN, 13));
-		txtrPassword.setBackground(SystemColor.control);
-		txtrPassword.setText("Password:");
-		txtrPassword.setBounds(22, 88, 112, 22);
-		frame.getContentPane().add(txtrPassword);
-		
-		JTextArea txtrPaymentPlan = new JTextArea();
-		txtrPaymentPlan.setFont(new Font("Dialog", Font.PLAIN, 13));
-		txtrPaymentPlan.setBackground(SystemColor.control);
-		txtrPaymentPlan.setText("Payment plan:");
-		txtrPaymentPlan.setBounds(22, 119, 112, 22);
-		frame.getContentPane().add(txtrPaymentPlan);
-		
-		JButton btnAddUser = new JButton("Add user");
-		btnAddUser.setBounds(10, 167, 122, 23);
+		JButton btnAddUser = new JButton("Add book");
+		btnAddUser.setBounds(10, 224, 122, 23);
 		frame.getContentPane().add(btnAddUser);
 		
-		JButton btnUpdateUser = new JButton("Update user");
-		btnUpdateUser.setBounds(154, 167, 128, 23);
+		JButton btnUpdateUser = new JButton("Update book");
+		btnUpdateUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnUpdateUser.setBounds(161, 224, 128, 23);
 		frame.getContentPane().add(btnUpdateUser);
 		
-		JButton btnNewButton = new JButton("Delete user");
-		btnNewButton.setBounds(302, 167, 122, 23);
+		JButton btnNewButton = new JButton("Delete book");
+		btnNewButton.setBounds(314, 224, 122, 23);
 		frame.getContentPane().add(btnNewButton);
 		
 		textField_3 = new JTextField();
@@ -115,13 +83,55 @@ public class AdminPage {
 		JButton btnNewButton_1 = new JButton("Back");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login log= new Login();
+				LoginPage log= new LoginPage();
 				log.newScreenLog();
 				frame.setVisible(false);
 			}
 		});
 		btnNewButton_1.setBounds(180, 373, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(144, 90, 190, 20);
+		frame.getContentPane().add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(144, 121, 190, 20);
+		frame.getContentPane().add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(144, 152, 190, 20);
+		frame.getContentPane().add(textField_6);
+		
+		JTextArea txtrTitle = new JTextArea();
+		txtrTitle.setText("Title:");
+		txtrTitle.setFont(new Font("Dialog", Font.PLAIN, 13));
+		txtrTitle.setBackground(SystemColor.menu);
+		txtrTitle.setBounds(20, 59, 112, 22);
+		frame.getContentPane().add(txtrTitle);
+		
+		JTextArea txtrAuthor = new JTextArea();
+		txtrAuthor.setText("Author:");
+		txtrAuthor.setFont(new Font("Dialog", Font.PLAIN, 13));
+		txtrAuthor.setBackground(SystemColor.menu);
+		txtrAuthor.setBounds(20, 88, 112, 22);
+		frame.getContentPane().add(txtrAuthor);
+		
+		JTextArea txtrGenre = new JTextArea();
+		txtrGenre.setText("Genre:");
+		txtrGenre.setFont(new Font("Dialog", Font.PLAIN, 13));
+		txtrGenre.setBackground(SystemColor.menu);
+		txtrGenre.setBounds(20, 119, 112, 22);
+		frame.getContentPane().add(txtrGenre);
+		
+		JTextArea txtrReleasedate = new JTextArea();
+		txtrReleasedate.setText("Release_date:");
+		txtrReleasedate.setFont(new Font("Dialog", Font.PLAIN, 13));
+		txtrReleasedate.setBackground(SystemColor.menu);
+		txtrReleasedate.setBounds(20, 150, 112, 22);
+		frame.getContentPane().add(txtrReleasedate);
 	}
-
 }

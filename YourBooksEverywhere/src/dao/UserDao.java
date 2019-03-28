@@ -36,6 +36,7 @@ public class UserDao {
 		System.out.println("Row updated!");
 				
 	}
+	
 	public int searchUser(User usr) throws SQLException, ClassNotFoundException {
 		
 		Connection connection = DBconnector.getConnection();
@@ -62,5 +63,6 @@ public class UserDao {
 
 	}
 	
+
 	
 }

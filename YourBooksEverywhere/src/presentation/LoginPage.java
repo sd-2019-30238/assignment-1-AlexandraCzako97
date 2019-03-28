@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
+import businessLogic.AdminLogic;
 import businessLogic.UserLogic;
 import dao.User;
 
@@ -17,7 +18,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
-public class Login {
+public class LoginPage {
 
 	private JFrame frmLogin;
 	private JTextField textField;
@@ -30,7 +31,7 @@ public class Login {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login window = new Login();
+					LoginPage window = new LoginPage();
 					window.frmLogin.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +44,7 @@ public class Login {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login window = new Login();
+					LoginPage window = new LoginPage();
 					window.frmLogin.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +56,7 @@ public class Login {
 	/**
 	 * Create the application.
 	 */
-	public Login() {
+	public LoginPage() {
 		initialize();
 	}
 
@@ -114,6 +115,7 @@ public class Login {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				UserLogic usr = new UserLogic();
+				AdminLogic adm= new AdminLogic();
 				
 				String username= textField.getText();
 				String password= textField_1.getText();
@@ -125,9 +127,14 @@ public class Login {
 						frmLogin.setVisible(false);
 					}
 					else {
-						textArea.setText("Wrong username/password");
+						if(adm.validateAdmin(username, password)==1) {
+							AdminPage search = new AdminPage();
+							search.newScreenAdmin();
+							frmLogin.setVisible(false);
+						}else {
+							textArea.setText("Wrong username/password");
 						}
-					
+					}
 				} catch (ClassNotFoundException | SQLException e) {
 					e.printStackTrace();
 				}
@@ -151,30 +158,5 @@ public class Login {
 		txtrLoginRegisterFor.setBounds(65, 106, 348, 37);
 		frmLogin.getContentPane().add(txtrLoginRegisterFor);
 		
-		JButton btnNewButton_1 = new JButton("Admin Login");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                UserLogic usr = new UserLogic();
-				
-				String username= textField.getText();
-				String password= textField_1.getText();
-				
-				try {
-					if(usr.validateUser(username, password)==1) {
-						AdminPage adm = new AdminPage();
-						adm.newScreenAdmin();
-						frmLogin.setVisible(false);
-					}
-					else {
-						textArea.setText("Wrong username/password");
-						}
-					
-				} catch (ClassNotFoundException | SQLException ee) {
-					ee.printStackTrace();
-				}
-			}
-		});
-		btnNewButton_1.setBounds(106, 281, 250, 23);
-		frmLogin.getContentPane().add(btnNewButton_1);
 	}
 }
