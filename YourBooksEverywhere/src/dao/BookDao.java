@@ -12,30 +12,56 @@ import java.util.logging.Logger;
 public class BookDao {
 protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName());
 	
-    public static void insertBook(Book book ) throws SQLException, ClassNotFoundException {
-		Connection connection= (Connection) DBconnector.getConnection();
-		PreparedStatement stm = (PreparedStatement) connection.prepareStatement("INSERT INTO  book (idbook,title,author,genre,release_date) "
-				+ "VALUES ('"+ book.getBookId()+ "','" + book.getTitle() + "','" + book.getAuthor() + "','"+ book.getGenre()  + "','"+ book.getRelease_date()+ "')");
-		stm.executeUpdate();
+    public void insertBook(Book book ) throws SQLException, ClassNotFoundException {
+    	Connection connection= DBconnector.getConnection();
+		PreparedStatement stm =null;
+		try {
+			
+			String query="insert into book (title,author,genre,release_date,price,status) values (?,?,?,?,?,?)";
+			stm=connection.prepareStatement(query);
+			stm.setString(1, book.getTitle());
+			stm.setString(2, book.getAuthor());
+			stm.setString(3, book.getGenre());
+			stm.setString(4, book.getRelease_date());
+			stm.setString(5, book.getPrice());
+			stm.setString(6, book.getStatus());
+			stm.executeUpdate();
+			System.out.println("Row inserted!");
+			
+		}catch (Exception e) {
+			System.out.println("Error inserting the row!"+e);
+		}	
 		
-		System.out.println("Row inserted!");	
+	}
+	public void deleteBook(Book book ) throws SQLException, ClassNotFoundException {
+		Connection connection= DBconnector.getConnection();
+		PreparedStatement stm =null;
+		try {
+			
+			String query="delete from book where title="+"'"+book.getTitle()+"'";
+			stm=connection.prepareStatement(query);
+			stm.executeUpdate();
+			System.out.println("Row deleted!");
+			
+		}catch (Exception e) {
+			System.out.println("Error deleting the row!"+e);
+		}			
 	}
 	
-	public static void deleteBook(Book book ) throws SQLException, ClassNotFoundException {
-		Connection connection= (Connection) DBconnector.getConnection();
-		PreparedStatement stm = (PreparedStatement) connection.prepareStatement("DELETE FROM book WHERE idbook= "+"'"+book.getBookId()+"'");
-		stm.executeUpdate();
-				
-		System.out.println("Row deleted!");		
-	}
-	
-	public static void updateBook(Book book ) throws SQLException, ClassNotFoundException {
-		Connection connection= (Connection) DBconnector.getConnection();
-		PreparedStatement stm = (PreparedStatement) connection.prepareStatement("UPDATE book SET title= "+"'"+book.getTitle()+"'"+","
-		        +" author="+"'"+book.getAuthor()+"'"+","+" genre= "+"'"+book.getGenre()+"'"+","+" release_dat= "+"'"+book.getRelease_date()+"'"+" WHERE idbook= "+"'"+ book.getBookId()+"'");
-		stm.executeUpdate();
-	
-		System.out.println("Row updated!");
+	public void updateBook(Book book ) throws SQLException, ClassNotFoundException {
+		Connection connection= DBconnector.getConnection();
+		PreparedStatement stm =null;
+		System.out.println("Row updatesd!");
+		try {
+			
+			String query="update book set price="+"'"+book.getPrice()+"'"+" where title='"+book.getTitle()+"'";
+			stm=connection.prepareStatement(query);
+			stm.executeUpdate();
+			System.out.println("Row updated!");
+			
+		}catch (Exception e) {
+			System.out.println("Error updating the row!"+e);
+		}			
 				
 	}
 	
@@ -58,7 +84,7 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		return booksNumber;
 		}
 		catch(Exception e){
-			System.out.println("Wrong username/password");
+			System.out.println("No book!");
 		}
 		
 		return 0;
@@ -77,7 +103,8 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		stm =  (PreparedStatement) connection.prepareStatement(select);
 	    result = stm.executeQuery(select);
 		while(result.next()) {
-			  Book b=new Book(result.getInt("idbook"),result.getString("title"),result.getString("author"),result.getString("genre"),result.getDate("release_date"));
+			  Book b=new Book(result.getString("title"),result.getString("author"),result.getString("genre"),result.getString("release_date"),
+					  result.getString("price"),result.getString("status"));
 			  books.add(b);
 		}
 		
@@ -91,8 +118,6 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		ResultSet result= null;
 		
 		String select="SELECT * FROM book WHERE title="+"'"+title+"'";
-		
-		//ArrayList<String> books = new ArrayList<String>(); 
 		
 		stm =  (PreparedStatement) connection.prepareStatement(select);
 	    result = stm.executeQuery(select);
@@ -129,9 +154,7 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		ResultSet result= null;
 		
 		String select="SELECT * FROM book WHERE genre="+"'"+genre+"'";
-		
-		//ArrayList<String> books = new ArrayList<String>(); 
-		
+
 		stm =  (PreparedStatement) connection.prepareStatement(select);
 	    result = stm.executeQuery(select);
 	    
@@ -148,8 +171,6 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		ResultSet result= null;
 		
 		String select="SELECT * FROM book WHERE release_date="+"'"+date+"'";
-		
-		//ArrayList<String> books = new ArrayList<String>(); 
 		
 		stm =  (PreparedStatement) connection.prepareStatement(select);
 	    result = stm.executeQuery(select);

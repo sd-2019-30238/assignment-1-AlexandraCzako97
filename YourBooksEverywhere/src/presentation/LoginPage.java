@@ -3,6 +3,7 @@ package presentation;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
@@ -22,7 +23,7 @@ public class LoginPage {
 
 	private JFrame frmLogin;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField textField_1;
 
 	/**
 	 * Launch the application.
@@ -84,7 +85,7 @@ public class LoginPage {
 		frmLogin.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
+		textField_1 = new JPasswordField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(205, 202, 151, 20);
 		frmLogin.getContentPane().add(textField_1);
@@ -118,10 +119,9 @@ public class LoginPage {
 				AdminLogic adm= new AdminLogic();
 				
 				String username= textField.getText();
-				String password= textField_1.getText();
-				
+				String password= new String( textField_1.getPassword());
 				try {
-					if(usr.validateUser(username, password)==1) {
+					if(usr.validateUserLogin(username, password)==1) {
 						SearchPage search = new SearchPage();
 						search.newScreen();
 						frmLogin.setVisible(false);
@@ -146,6 +146,13 @@ public class LoginPage {
 		frmLogin.getContentPane().add(btnNewButton);
 		
 		JButton btnRegister = new JButton("Register");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				RegisterPage search = new RegisterPage();
+				search.newScreenRegister();
+				frmLogin.setVisible(false);
+			}
+		});
 		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnRegister.setBounds(234, 247, 118, 23);
 		frmLogin.getContentPane().add(btnRegister);

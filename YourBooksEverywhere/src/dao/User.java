@@ -1,7 +1,6 @@
 package dao;
 
 public class User {
-	private int userId;
 	private String username;
 	private String password;
 	private String payment_plan;
@@ -19,8 +18,7 @@ public class User {
 		
 	}
 	
-	public User(int userId, String username, String password, String payment_plan) {
-		this.userId=userId;
+	public User( String username, String password, String payment_plan) {
 		this.username=username;
 		this.password=password;
 		this.payment_plan=payment_plan;
@@ -30,13 +28,7 @@ public class User {
 		this.username=username;
 		this.password=password;
 	}
-	
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+
 	public String getUsername() {
 		return username;
 	}

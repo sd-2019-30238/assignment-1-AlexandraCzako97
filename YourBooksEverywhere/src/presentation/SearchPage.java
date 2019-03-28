@@ -19,6 +19,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+import javax.swing.JButton;
 
 public class SearchPage {
 
@@ -55,7 +56,7 @@ public class SearchPage {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 511, 376);
+		frame.setBounds(100, 100, 512, 499);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -116,7 +117,17 @@ public class SearchPage {
 		txtrSearchForBooks.setText("Search for books:");
 		txtrSearchForBooks.setBounds(48, 66, 106, 22);
 		frame.getContentPane().add(txtrSearchForBooks);
+		
+		JButton btnSortBooks = new JButton("Sort books");
+		btnSortBooks.setBounds(46, 313, 89, 23);
+		frame.getContentPane().add(btnSortBooks);
+		
+		JButton btnAddToMy = new JButton("Add to my library");
+		btnAddToMy.setBounds(145, 313, 115, 23);
+		frame.getContentPane().add(btnAddToMy);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(270, 312, 190, 22);
+		frame.getContentPane().add(textArea);
 	}
-	
-
 }

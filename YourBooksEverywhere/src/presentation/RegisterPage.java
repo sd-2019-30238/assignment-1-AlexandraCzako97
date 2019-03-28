@@ -10,21 +10,30 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
+
+import businessLogic.UserLogic;
+import dao.DBconnector;
+
 import javax.swing.JList;
+import javax.swing.JPasswordField;
 import javax.swing.ListSelectionModel;
 import javax.swing.AbstractListModel;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 
 public class RegisterPage {
 
 	private JFrame frame;
 	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JPasswordField textField_1;
+	private JPasswordField textField_2;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void newScreenRegister() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -66,12 +75,12 @@ public class RegisterPage {
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
+		textField_1 = new JPasswordField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(163, 136, 155, 20);
 		frame.getContentPane().add(textField_1);
 		
-		textField_2 = new JTextField();
+		textField_2 = new JPasswordField();
 		textField_2.setColumns(10);
 		textField_2.setBounds(163, 167, 155, 20);
 		frame.getContentPane().add(textField_2);
@@ -100,14 +109,50 @@ public class RegisterPage {
 		txtrTypePasswordAgain.setBounds(17, 167, 136, 22);
 		frame.getContentPane().add(txtrTypePasswordAgain);
 		
-		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(203, 244, 89, 23);
-		frame.getContentPane().add(btnLogin);
-		
 		JSpinner spinner = new JSpinner();
 		spinner.setModel(new SpinnerListModel(new String[] {"Monthly", "Yearly"}));
 		spinner.setBounds(163, 198, 155, 20);
 		frame.getContentPane().add(spinner);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBackground(SystemColor.control);
+		textArea.setBounds(103, 272, 283, 22);
+		frame.getContentPane().add(textArea);
+		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserLogic usr = new UserLogic();
+
+				String username= textField.getText();
+				String password= new String( textField_1.getPassword());
+				String password2= new String( textField_2.getPassword());
+				String payment_plan= (String) spinner.getValue();
+				
+				System.out.println(password+" "+password2);
+				
+				try {
+					if(password.equals(password2)) {
+						usr.addNewUser(username, password, payment_plan);
+					    LoginPage search = new LoginPage();
+					    search.newScreenLog();
+					    frame.setVisible(false);
+					}
+					else {
+					System.out.println("Passwords don't match");
+		
+						
+					}
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnLogin.setBounds(203, 244, 89, 23);
+		frame.getContentPane().add(btnLogin);
+		
+
 		
 		JTextArea txtrPaymentPlan = new JTextArea();
 		txtrPaymentPlan.setText("Payment plan:");
@@ -116,5 +161,6 @@ public class RegisterPage {
 		txtrPaymentPlan.setBackground(SystemColor.menu);
 		txtrPaymentPlan.setBounds(62, 196, 91, 22);
 		frame.getContentPane().add(txtrPaymentPlan);
+
 	}
 }

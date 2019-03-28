@@ -3,24 +3,38 @@ package dao;
 import java.sql.Date;
 
 public class Book {
-	private int bookId;
 	private String title;
 	private String author;
 	private String genre;
-	private Date release_date;
-	public Book(int bookId, String title, String author, String genre, Date release_date) {
-		this.bookId=bookId;
+	private String release_date;
+	private String price;
+	private String status;
+	
+	public Book() {
+		
+	}
+	public Book( String title, String author, String genre, String release_date,String price, String status) {
 		this.title=title;
 		this.author=author;
 		this.genre=genre;
 		this.release_date=release_date;
+		this.price=price;
+		this.status=status;
 	}
-	public int getBookId() {
-		return bookId;
+
+	public String getPrice() {
+		return price;
 	}
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
+	public void setPrice(String price) {
+		this.price = price;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -39,11 +53,11 @@ public class Book {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	public Date getRelease_date() {
+	public String getRelease_date() {
 		return release_date;
 	}
-	public void setRelease_date(Date release_date) {
-		this.release_date = release_date;
+	public void setRelease_date(String release_date2) {
+		this.release_date = release_date2;
 	}
 	
 

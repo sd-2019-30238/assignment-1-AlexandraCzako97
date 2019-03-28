@@ -10,27 +10,36 @@ import java.util.logging.Logger;
 public class UserDao {
 	protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName());
 	
-    public static void insertUser(User usr ) throws SQLException, ClassNotFoundException {
-		Connection connection= (Connection) DBconnector.getConnection();
-		PreparedStatement stm = (PreparedStatement) connection.prepareStatement("INSERT INTO  users (idusers,username,password,payment_plan) "
-				+ "VALUES ('"+ usr.getUserId()+ "','" + usr.getUsername() + "','" + usr.getPassword() + "','"+ usr.getPayment_plan() +  "')");
-		stm.executeUpdate();
-		
-		System.out.println("Row inserted!");	
+    public void insertUser(User usr ) throws SQLException, ClassNotFoundException {
+    	Connection connection= (Connection) DBconnector.getConnection();
+		PreparedStatement stm =null;
+		try {
+			//System.out.println("Row inserted!");
+			String query="insert into users (username,password,payment_plan) values (?,?,?)";
+			stm=connection.prepareStatement(query);
+			stm.setString(1, usr.getUsername());
+			stm.setString(2, usr.getPassword());
+			stm.setString(3, usr.getPayment_plan());
+			//System.out.println("Row inserted!");
+			stm.executeUpdate();
+			
+		}catch (Exception e) {
+			System.out.println("Error inserting the row!");
+		}	
 	}
 	
-	public static void deleteUser(User usr ) throws SQLException, ClassNotFoundException {
+	public void deleteUser(User usr ) throws SQLException, ClassNotFoundException {
 		Connection connection= (Connection) DBconnector.getConnection();
-		PreparedStatement stm = (PreparedStatement) connection.prepareStatement("DELETE FROM users WHERE idusers= "+"'"+usr.getUserId()+"'");
+		PreparedStatement stm = (PreparedStatement) connection.prepareStatement("DELETE FROM users WHERE username= "+"'"+usr.getUsername()+"'");
 		stm.executeUpdate();
 				
 		System.out.println("Row deleted!");		
 	}
 	
-	public static void updateUser(User usr ) throws SQLException, ClassNotFoundException {
+	public void updateUser(User usr ) throws SQLException, ClassNotFoundException {
 		Connection connection= (Connection) DBconnector.getConnection();
 		PreparedStatement stm = (PreparedStatement) connection.prepareStatement("UPDATE users SET username= "+"'"+usr.getUsername()+"'"+","
-		        +" password="+"'"+usr.getPassword()+"'"+","+" payment_plan= "+"'"+usr.getPayment_plan()+"'"+" WHERE idusers= "+"'"+ usr.getUserId()+"'");
+		        +" password="+"'"+usr.getPassword()+"'"+","+" payment_plan= "+"'"+usr.getPayment_plan()+"'"+" WHERE username= "+"'"+ usr.getUsername()+"'");
 		stm.executeUpdate();
 	
 		System.out.println("Row updated!");
