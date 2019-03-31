@@ -29,7 +29,7 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 			System.out.println("Row inserted!");
 			
 		}catch (Exception e) {
-			System.out.println("Error inserting the row!"+e);
+			System.out.println("Error inserting the row!");
 		}	
 		
 	}
@@ -44,7 +44,7 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 			System.out.println("Row deleted!");
 			
 		}catch (Exception e) {
-			System.out.println("Error deleting the row!"+e);
+			System.out.println("Error deleting the row!");
 		}			
 	}
 	
@@ -54,18 +54,18 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		System.out.println("Row updatesd!");
 		try {
 			
-			String query="update book set price="+"'"+book.getPrice()+"'"+" where title='"+book.getTitle()+"'";
+			String query="update book set status="+"'"+book.getStatus()+"'"+" where title='"+book.getTitle()+"'";
 			stm=connection.prepareStatement(query);
 			stm.executeUpdate();
 			System.out.println("Row updated!");
 			
 		}catch (Exception e) {
-			System.out.println("Error updating the row!"+e);
+			System.out.println("Error updating the row!");
 		}			
 				
 	}
 	
-	public int searchBook(Book book) throws SQLException, ClassNotFoundException {
+	public boolean searchBook(Book book) throws SQLException, ClassNotFoundException {
 		
 		Connection connection = DBconnector.getConnection();
 		Statement stm = null;
@@ -77,11 +77,37 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		result=stm.executeQuery(query);
 		
 		result.next();
-		int booksNumber=result.getInt("num");
-		if(booksNumber!=0) {
+		if(result.getInt("num")!=0) {
 			System.out.println("Book found!");
+			return true;
 		}
-		return booksNumber;
+		
+		}
+		catch(Exception e){
+			System.out.println("No book!");
+		}
+		
+		return false;
+
+	}
+	
+	public int takenBook(Book book) throws SQLException, ClassNotFoundException {
+		
+		Connection connection = DBconnector.getConnection();
+		Statement stm = null;
+		ResultSet result = null;
+		
+		try {
+		String query = "SELECT COUNT(title) AS num FROM book WHERE title="+"'"+book.getTitle()+"'";
+		stm=connection.createStatement();
+		result=stm.executeQuery(query);
+		
+		result.next();
+		if(result.getInt("num")!=0) {
+			System.out.println("Book found!");
+			return 1;
+		}
+		
 		}
 		catch(Exception e){
 			System.out.println("No book!");
@@ -91,7 +117,8 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 
 	}
 	
-    public ArrayList<Book> viewAllBooks() throws SQLException, ClassNotFoundException {
+	
+    public ArrayList<String[]> viewAllBooks() throws SQLException, ClassNotFoundException {
 		
 		Connection connection= (Connection) DBconnector.getConnection();
 		PreparedStatement stm= null;
@@ -99,36 +126,35 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		
 		String select="SELECT * FROM book";
 				
-		ArrayList<Book> books = new ArrayList<Book>(); 
-		stm =  (PreparedStatement) connection.prepareStatement(select);
-	    result = stm.executeQuery(select);
-		while(result.next()) {
-			  Book b=new Book(result.getString("title"),result.getString("author"),result.getString("genre"),result.getString("release_date"),
-					  result.getString("price"),result.getString("status"));
-			  books.add(b);
-		}
-		
-		return books;
-	}
-    
-    public void filterBooksByTitle(String title) throws ClassNotFoundException, SQLException{
-
-		Connection connection= (Connection) DBconnector.getConnection();
-		PreparedStatement stm= null;
-		ResultSet result= null;
-		
-		String select="SELECT * FROM book WHERE title="+"'"+title+"'";
-		
+		ArrayList<String[]> books = new ArrayList<String[]>(); 
 		stm =  (PreparedStatement) connection.prepareStatement(select);
 	    result = stm.executeQuery(select);
 	    
-		while(result.next()) {
-			  System.out.println(result.getString(3)+" "+result.getString(4)+" "+result.getString(5));
+	    while(result.next()) {
+			  
+			  String[] oneBook = new String[50];
+			  String x=result.getString(1);
+			  String y=result.getString(2);
+			  String z=result.getString(3);
+			  String k=result.getString(4);
+			  String q=result.getString(5);
+			  String w=result.getString(6);
+			  oneBook[0]=x;
+			  oneBook[1]=y;
+			  oneBook[2]=z;
+			  oneBook[3]=k;
+			  oneBook[4]=q;
+			  oneBook[5]=w;
+			  
+			  books.add(oneBook);
 		}
 		
-    }
+		return books;
+		
+	}
     
-    public void filterBooksByAuthor(String author) throws ClassNotFoundException, SQLException{
+    
+    public ArrayList<String[]> filterBooksByAuthor(String author) throws ClassNotFoundException, SQLException{
 
 		Connection connection= (Connection) DBconnector.getConnection();
 		PreparedStatement stm= null;
@@ -136,18 +162,37 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		
 		String select="SELECT * FROM book WHERE author="+"'"+author+"'";
 		
-		//ArrayList<String> books = new ArrayList<String>(); 
+		ArrayList<String[]> books = new ArrayList<String[]>();
 		
 		stm =  (PreparedStatement) connection.prepareStatement(select);
 	    result = stm.executeQuery(select);
 	    
+	
 		while(result.next()) {
-			  System.out.println(result.getString(2)+" "+result.getString(4)+" "+result.getString(5));
+			  
+			  String[] oneBook = new String[50];
+			  String x=result.getString(1);
+			  String y=result.getString(2);
+			  String z=result.getString(3);
+			  String k=result.getString(4);
+			  String q=result.getString(5);
+			  String w=result.getString(6);
+			  oneBook[0]=x;
+			  oneBook[1]=y;
+			  oneBook[2]=z;
+			  oneBook[3]=k;
+			  oneBook[4]=q;
+			  oneBook[5]=w;
+			  
+			  books.add(oneBook);
 		}
 		
+		return books;
+		
     }
+
     
-    public void filterBooksByGenre(String genre) throws ClassNotFoundException, SQLException{
+    public ArrayList<String[]> filterBooksByGenre(String genre) throws ClassNotFoundException, SQLException{
 
 		Connection connection= (Connection) DBconnector.getConnection();
 		PreparedStatement stm= null;
@@ -155,16 +200,35 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		
 		String select="SELECT * FROM book WHERE genre="+"'"+genre+"'";
 
+		ArrayList<String[]> books = new ArrayList<String[]>(); 
 		stm =  (PreparedStatement) connection.prepareStatement(select);
 	    result = stm.executeQuery(select);
 	    
-		while(result.next()) {
-			  System.out.println(result.getString(2)+" "+result.getString(3)+" "+result.getString(5));
+	    while(result.next()) {
+			  
+			  String[] oneBook = new String[50];
+			  String x=result.getString(1);
+			  String y=result.getString(2);
+			  String z=result.getString(3);
+			  String k=result.getString(4);
+			  String q=result.getString(5);
+			  String w=result.getString(6);
+			  oneBook[0]=x;
+			  oneBook[1]=y;
+			  oneBook[2]=z;
+			  oneBook[3]=k;
+			  oneBook[4]=q;
+			  oneBook[5]=w;
+			  
+			  books.add(oneBook);
 		}
+		
+		return books;
+		
 		
     }
     
-    public void filterBooksByDate(Date date) throws ClassNotFoundException, SQLException{
+    public ArrayList<String[]> filterBooksByDate(Date date) throws ClassNotFoundException, SQLException{
 
 		Connection connection= (Connection) DBconnector.getConnection();
 		PreparedStatement stm= null;
@@ -172,13 +236,31 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		
 		String select="SELECT * FROM book WHERE release_date="+"'"+date+"'";
 		
+		ArrayList<String[]> books = new ArrayList<String[]>(); 
 		stm =  (PreparedStatement) connection.prepareStatement(select);
 	    result = stm.executeQuery(select);
 	    
-		while(result.next()) {
-			  System.out.println(result.getString(2)+" "+result.getString(3)+" "+result.getString(5)+" "+result.getString(6));
+	    while(result.next()) {
+			  
+			  String[] oneBook = new String[50];
+			  String x=result.getString(1);
+			  String y=result.getString(2);
+			  String z=result.getString(3);
+			  String k=result.getString(4);
+			  String q=result.getString(5);
+			  String w=result.getString(6);
+			  oneBook[0]=x;
+			  oneBook[1]=y;
+			  oneBook[2]=z;
+			  oneBook[3]=k;
+			  oneBook[4]=q;
+			  oneBook[5]=w;
+			  
+			  books.add(oneBook);
 		}
 		
+		return books;
+		
+		
     }
-
 }

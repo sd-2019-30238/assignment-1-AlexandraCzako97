@@ -1,7 +1,9 @@
 package businessLogic;
 
-import java.sql.Date;
+
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 
 import dao.Book;
 import dao.BookDao;
@@ -9,7 +11,7 @@ import dao.BookDao;
 
 public class BookLogic {
 	
-	public int validateBook(String title, String author, String genre, String release_date,String price, String status) {
+	public boolean validateBook(String title, String author, String genre, String release_date,String price, String status) {
 		Book book = new Book();
 		book.setTitle(title);
 		book.setAuthor(author);
@@ -18,13 +20,13 @@ public class BookLogic {
 		book.setRelease_date(release_date);
 		book.setStatus(status);
 		
-		if(title.length()==0||author.length()==0||genre.length()==0||price.length()==0||release_date.length()==0||status.length()==0) {
-			return 0;
+		if(title.length()<1||author.length()<1||genre.length()<1||price.length()<1||release_date.length()<1||status.length()<1) {
+			return false;
 		}
-		return 1;
+		return true;
 	}
 	
-	public int addNewBook(String title, String author, String genre, String release_date,String price, String status) throws ClassNotFoundException, SQLException {
+	public boolean addNewBook(String title, String author, String genre, String release_date,String price, String status) throws ClassNotFoundException, SQLException {
 		
 		BookDao bDao= new BookDao();
 		Book book= new Book();
@@ -35,17 +37,17 @@ public class BookLogic {
 		book.setRelease_date(release_date);
 		book.setPrice(price);
 		book.setStatus(status);
-		//System.out.println("book added");
-		if(validateBook(title, author, genre, release_date,price,status)==1) {
+		
+		if(validateBook(title, author, genre, release_date,price,status)==true) {
 			bDao.insertBook(book);
-			//System.out.println("book addea");
-			return 1;
+			
+			return true;
 		}
 		
-		return 0;
+		return false;
 	}
 	
-	public int deleteBook(String title, String author, String genre, String release_date,String price, String status) throws ClassNotFoundException, SQLException {
+	public boolean deleteBook(String title, String author, String genre, String release_date,String price, String status) throws ClassNotFoundException, SQLException {
 		
 		BookDao bDao= new BookDao();
 		Book book= new Book();
@@ -57,16 +59,13 @@ public class BookLogic {
 		book.setPrice(price);
 		book.setStatus(status);
 
-		if(validateBook(title, author, genre, release_date,price,status)==1) {
-			bDao.deleteBook(book);
+		bDao.deleteBook(book);
 
-			return 1;
-		}
-		
-		return 0;
+		return true;
+
 	}
 	
-	public int updateBook(String title, String author, String genre, String release_date,String price, String status) throws ClassNotFoundException, SQLException {
+	public boolean updateBook(String title, String author, String genre, String release_date,String price, String status) throws ClassNotFoundException, SQLException {
 		
 		BookDao bDao= new BookDao();
 		Book book= new Book();
@@ -79,10 +78,50 @@ public class BookLogic {
 		book.setStatus(status);
 
 		bDao.updateBook(book);
-		return 1;
+		
+		return true;
 		
 		
 
+	}
+	
+	public boolean searchBook(String title) throws ClassNotFoundException, SQLException {
+		
+		BookDao bDao= new BookDao();
+		Book book= new Book();
+		
+		book.setTitle(title);
+
+		if(bDao.searchBook(book)!=false) {
+		   return true;
+		}
+		return false;
+		
+		
+	}
+	
+	public  ArrayList<String[]> viewAll() throws SQLException, ClassNotFoundException {
+		
+		BookDao bDao= new BookDao();
+		ArrayList<String[]> s=bDao.viewAllBooks();
+		return s;
+	}
+	
+	
+	public ArrayList<String[]> filterBooks(String filter, String filter2) throws ClassNotFoundException, SQLException{
+		BookDao bdao= new BookDao();
+		if(filter=="author") {
+			//System.out.println(author);
+			ArrayList<String[]> s=bdao.filterBooksByAuthor(filter2);
+			return s;
+		}else if(filter=="genre") {
+			//System.out.println(author);
+			ArrayList<String[]> s=bdao.filterBooksByGenre(filter2);
+			return s;
+		
+		
+	}
+		return null;
 	}
 	
 	
