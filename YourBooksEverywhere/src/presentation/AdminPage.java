@@ -25,6 +25,7 @@ public class AdminPage {
 	private JTextField textField_6;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -132,9 +133,10 @@ public class AdminPage {
 				String release_date= textField_6.getText();
 				String price= textField.getText();
 				String status= textField_1.getText();
+				String rating= textField_2.getText();
 				
 				try {
-					book.updateBook(title, author, genre, release_date,price,status);
+					book.updateBook(title, author, genre, release_date,price,status,rating);
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -156,9 +158,10 @@ public class AdminPage {
 				String release_date= textField_6.getText();
 				String price= textField.getText();
 				String status= textField_1.getText();
+				String rating= textField_2.getText();
 				
 				try {
-					book.deleteBook(title, author, genre, release_date,price,status);
+					book.deleteBook(title, author, genre, release_date,price,status,rating);
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -225,5 +228,17 @@ public class AdminPage {
 		txtrStatus.setBackground(SystemColor.menu);
 		txtrStatus.setBounds(20, 212, 112, 22);
 		frame.getContentPane().add(txtrStatus);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(144, 245, 190, 20);
+		frame.getContentPane().add(textField_2);
+		
+		JTextArea txtrRating = new JTextArea();
+		txtrRating.setText("Rating:");
+		txtrRating.setFont(new Font("Dialog", Font.PLAIN, 13));
+		txtrRating.setBackground(SystemColor.menu);
+		txtrRating.setBounds(20, 245, 112, 22);
+		frame.getContentPane().add(txtrRating);
 	}
 }

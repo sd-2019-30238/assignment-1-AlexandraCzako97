@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import businessLogic.BookLogic;
+import businessLogic.Recommend;
+import businessLogic.RecommendFactory;
 import dao.Book;
 
 import dao.BookDao;
@@ -64,14 +66,14 @@ public class SearchPage {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 512, 417);
+		frame.setBounds(100, 100, 512, 439);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		
 		
 		table_1 = new JTable();
-		table_1.setBounds(48, 154, 408, 137);
+		table_1.setBounds(48, 154, 408, 144);
 		table_1.setAutoscrolls(true);
 		
 		frame.getContentPane().add(table_1);
@@ -82,13 +84,13 @@ public class SearchPage {
 		txtrSortBy.setFont(new Font("Dialog", Font.PLAIN, 13));
 		txtrSortBy.setBackground(SystemColor.control);
 		txtrSortBy.setText("Filter by:");
-		txtrSortBy.setBounds(48, 122, 62, 22);
+		txtrSortBy.setBounds(147, 119, 62, 22);
 		frame.getContentPane().add(txtrSortBy);
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setForeground(SystemColor.control);
 		spinner.setModel(new SpinnerListModel(new String[] {"Author", "Genre", "Release Date","Price","Status"}));
-		spinner.setBounds(116, 124, 97, 20);
+		spinner.setBounds(213, 121, 97, 20);
 		frame.getContentPane().add(spinner);
 		
 		JTextArea txtrSearchForYour = new JTextArea();
@@ -100,17 +102,9 @@ public class SearchPage {
 		frame.getContentPane().add(txtrSearchForYour);
 		
 		textField = new JTextField();
-		textField.setBounds(164, 68, 185, 20);
+		textField.setBounds(214, 55, 206, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
-		
-		JTextArea txtrSearchForBooks = new JTextArea();
-		txtrSearchForBooks.setEditable(false);
-		txtrSearchForBooks.setFont(new Font("Dialog", Font.PLAIN, 13));
-		txtrSearchForBooks.setBackground(SystemColor.control);
-		txtrSearchForBooks.setText("Search for books:");
-		txtrSearchForBooks.setBounds(48, 66, 106, 22);
-		frame.getContentPane().add(txtrSearchForBooks);
 		
 		JButton btnSortBooks = new JButton("Sort books");
 		btnSortBooks.addActionListener(new ActionListener() {
@@ -161,15 +155,15 @@ public class SearchPage {
 					}
 			}
 		});
-		btnSortBooks.setBounds(46, 313, 89, 23);
+		btnSortBooks.setBounds(320, 120, 100, 23);
 		frame.getContentPane().add(btnSortBooks);
 		
 		JButton btnAddToMy = new JButton("Add to my library");
-		btnAddToMy.setBounds(137, 313, 123, 23);
+		btnAddToMy.setBounds(330, 309, 123, 23);
 		frame.getContentPane().add(btnAddToMy);
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(270, 312, 190, 22);
+		textArea.setBounds(48, 343, 408, 22);
 		frame.getContentPane().add(textArea);
 		
 		JButton btnGoToMy = new JButton("Go to my library");
@@ -181,19 +175,11 @@ public class SearchPage {
 				//frame.setVisible(false);
 			}
 		});
-		btnGoToMy.setBounds(270, 345, 190, 23);
+		btnGoToMy.setBounds(266, 376, 190, 23);
 		frame.getContentPane().add(btnGoToMy);
 		
-		JButton btnSearch = new JButton("Search");
-		btnSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			
-			
-			}
-		});
-		btnSearch.setBounds(371, 67, 89, 23);
-		frame.getContentPane().add(btnSearch);
+		
+
 		
 		JButton btnNewButton = new JButton("All books");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -221,8 +207,60 @@ public class SearchPage {
               
 			}
 		});
-		btnNewButton.setBounds(48, 345, 212, 23);
+		btnNewButton.setBounds(51, 376, 212, 23);
 		frame.getContentPane().add(btnNewButton);
+		
+		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerListModel(new String[] {"Genre", "Trends"}));
+		spinner_1.setForeground(SystemColor.menu);
+		spinner_1.setBounds(213, 86, 97, 20);
+		
+		JButton btnSearch = new JButton("Recommend");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				RecommendFactory rf= new RecommendFactory();
+				String rrr="";
+				Recommend rr=rf.getOneRecommend(spinner_1.getValue().toString());
+				try {
+					rrr=rr.returnRecommend();
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				}
+				
+				//System.out.println(spinner_1.getValue().toString());
+				textArea.setText(rrr);
+			}
+		});
+		
+		btnSearch.setBounds(320, 86, 100, 23);
+		frame.getContentPane().add(btnSearch);
+		
+		
+		frame.getContentPane().add(spinner_1);
+		
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setText("Recommend by:");
+		textArea_1.setFont(new Font("Dialog", Font.PLAIN, 13));
+		textArea_1.setEditable(false);
+		textArea_1.setBackground(SystemColor.menu);
+		textArea_1.setBounds(103, 85, 106, 22);
+		frame.getContentPane().add(textArea_1);
+		
+		JTextArea txtrRecommendedBook = new JTextArea();
+		txtrRecommendedBook.setText("Recommended book:");
+		txtrRecommendedBook.setFont(new Font("Dialog", Font.PLAIN, 13));
+		txtrRecommendedBook.setEditable(false);
+		txtrRecommendedBook.setBackground(SystemColor.menu);
+		txtrRecommendedBook.setBounds(48, 310, 190, 22);
+		frame.getContentPane().add(txtrRecommendedBook);
+		
+		JTextArea txtrSearchBooksBy = new JTextArea();
+		txtrSearchBooksBy.setText("Search books by:");
+		txtrSearchBooksBy.setFont(new Font("Dialog", Font.PLAIN, 13));
+		txtrSearchBooksBy.setEditable(false);
+		txtrSearchBooksBy.setBackground(SystemColor.menu);
+		txtrSearchBooksBy.setBounds(98, 55, 106, 22);
+		frame.getContentPane().add(txtrSearchBooksBy);
 
 	}
 }

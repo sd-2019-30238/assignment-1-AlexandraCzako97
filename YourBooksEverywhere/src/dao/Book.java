@@ -9,17 +9,25 @@ public class Book {
 	private String release_date;
 	private String price;
 	private String status;
+	private String rating;
 	
+	public String getRating() {
+		return rating;
+	}
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
 	public Book() {
 		
 	}
-	public Book( String title, String author, String genre, String release_date,String price, String status) {
+	public Book( String title, String author, String genre, String release_date,String price, String status,String rating) {
 		this.title=title;
 		this.author=author;
 		this.genre=genre;
 		this.release_date=release_date;
 		this.price=price;
 		this.status=status;
+		this.rating=rating;
 	}
 
 	public String getPrice() {
@@ -59,6 +67,7 @@ public class Book {
 	public void setRelease_date(String release_date2) {
 		this.release_date = release_date2;
 	}
+
 	
 
 }

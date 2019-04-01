@@ -47,7 +47,7 @@ public class BookLogic {
 		return false;
 	}
 	
-	public boolean deleteBook(String title, String author, String genre, String release_date,String price, String status) throws ClassNotFoundException, SQLException {
+	public boolean deleteBook(String title, String author, String genre, String release_date,String price, String status,String rating) throws ClassNotFoundException, SQLException {
 		
 		BookDao bDao= new BookDao();
 		Book book= new Book();
@@ -58,6 +58,7 @@ public class BookLogic {
 		book.setRelease_date(release_date);
 		book.setPrice(price);
 		book.setStatus(status);
+		book.setRating(rating);
 
 		bDao.deleteBook(book);
 
@@ -65,7 +66,7 @@ public class BookLogic {
 
 	}
 	
-	public boolean updateBook(String title, String author, String genre, String release_date,String price, String status) throws ClassNotFoundException, SQLException {
+	public boolean updateBook(String title, String author, String genre, String release_date,String price, String status,String rating) throws ClassNotFoundException, SQLException {
 		
 		BookDao bDao= new BookDao();
 		Book book= new Book();
@@ -76,6 +77,7 @@ public class BookLogic {
 		book.setRelease_date(release_date);
 		book.setPrice(price);
 		book.setStatus(status);
+		book.setRating(rating);
 
 		bDao.updateBook(book);
 		

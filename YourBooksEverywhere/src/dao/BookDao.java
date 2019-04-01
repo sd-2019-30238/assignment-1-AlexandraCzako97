@@ -228,7 +228,7 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		
     }
     
-    public ArrayList<String[]> filterBooksByDate(Date date) throws ClassNotFoundException, SQLException{
+    public ArrayList<String[]> filterBooksByDate(String date) throws ClassNotFoundException, SQLException{
 
 		Connection connection= (Connection) DBconnector.getConnection();
 		PreparedStatement stm= null;
@@ -262,5 +262,41 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		return books;
 		
 		
+    }
+    
+   
+    public String getRecommendRating() throws SQLException, ClassNotFoundException {
+    	Connection connection= (Connection) DBconnector.getConnection();
+		PreparedStatement stm= null;
+		ResultSet result= null;
+		
+		String select="SELECT title FROM book WHERE rating >80 LIMIT 1";
+		
+		stm =  (PreparedStatement) connection.prepareStatement(select);
+	    result = stm.executeQuery(select);
+	    
+	    while(result.next()) {
+			  return result.getString(1);
+			  
+		}
+		
+	    return null;
+    }
+    
+    public String getRecommendGender() throws SQLException, ClassNotFoundException {
+    	Connection connection= (Connection) DBconnector.getConnection();
+		PreparedStatement stm= null;
+		ResultSet result= null;
+		
+		String select="SELECT title FROM book WHERE genre='Romance' LIMIT 1";
+		
+		stm =  (PreparedStatement) connection.prepareStatement(select);
+	    result = stm.executeQuery(select);
+	    
+	    while(result.next()) {
+			  return result.getString(1);
+		}
+		
+	    return null;
     }
 }
