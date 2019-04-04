@@ -102,6 +102,19 @@ public class BookLogic {
 		
 	}
 	
+	public ArrayList<String[]> statusBook(String status) throws ClassNotFoundException, SQLException {
+		
+		BookDao bdao= new BookDao();
+		if(status=="free") {
+			ArrayList<String[]> s=bdao.filterBooksByStatus(status);
+			return s;
+		}else {
+			System.out.println("Taken book!");
+		}
+		
+		return null;
+	}
+	
 	public  ArrayList<String[]> viewAll() throws SQLException, ClassNotFoundException {
 		
 		BookDao bDao= new BookDao();

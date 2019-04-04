@@ -72,6 +72,22 @@ public class UserDao {
 
 	}
 	
-
+	 public String validatedPayment(User usr) throws SQLException, ClassNotFoundException {
+	    	Connection connection= (Connection) DBconnector.getConnection();
+			PreparedStatement stm= null;
+			ResultSet result= null;
+			
+			String query="SELECT * FROM users WHERE username="+"'"+usr.getUsername()+"'"+"AND validated_payment='yes'";
+			
+			stm =  (PreparedStatement) connection.prepareStatement(query);
+		    result = stm.executeQuery(query);
+		    
+		    while(result.next()) {
+				  return result.getString(1);
+				  
+			}
+			
+		    return null;
+	    }
 	
 }

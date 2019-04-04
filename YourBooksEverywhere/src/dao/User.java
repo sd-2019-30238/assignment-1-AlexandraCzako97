@@ -5,14 +5,8 @@ public class User {
 	private String password;
 	private String payment_plan;
 	private String status;
+	private String validated_payment;
 	
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 	public User() {
 		
@@ -28,6 +22,24 @@ public class User {
 		this.username=username;
 		this.password=password;
 	}
+	
+	
+	public String getValidated_payment() {
+		return validated_payment;
+	}
+
+	public void setValidated_payment(String validated_payment) {
+		this.validated_payment = validated_payment;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 	public String getUsername() {
 		return username;

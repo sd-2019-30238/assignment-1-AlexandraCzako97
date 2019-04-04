@@ -33,6 +33,8 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		}	
 		
 	}
+    
+
 	public void deleteBook(Book book ) throws SQLException, ClassNotFoundException {
 		Connection connection= DBconnector.getConnection();
 		PreparedStatement stm =null;
@@ -91,32 +93,6 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 
 	}
 	
-	public int takenBook(Book book) throws SQLException, ClassNotFoundException {
-		
-		Connection connection = DBconnector.getConnection();
-		Statement stm = null;
-		ResultSet result = null;
-		
-		try {
-		String query = "SELECT COUNT(title) AS num FROM book WHERE title="+"'"+book.getTitle()+"'";
-		stm=connection.createStatement();
-		result=stm.executeQuery(query);
-		
-		result.next();
-		if(result.getInt("num")!=0) {
-			System.out.println("Book found!");
-			return 1;
-		}
-		
-		}
-		catch(Exception e){
-			System.out.println("No book!");
-		}
-		
-		return 0;
-
-	}
-	
 	
     public ArrayList<String[]> viewAllBooks() throws SQLException, ClassNotFoundException {
 		
@@ -124,11 +100,11 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		PreparedStatement stm= null;
 		ResultSet result= null;
 		
-		String select="SELECT * FROM book";
+		String query="SELECT * FROM book";
 				
 		ArrayList<String[]> books = new ArrayList<String[]>(); 
-		stm =  (PreparedStatement) connection.prepareStatement(select);
-	    result = stm.executeQuery(select);
+		stm =  (PreparedStatement) connection.prepareStatement(query);
+	    result = stm.executeQuery(query);
 	    
 	    while(result.next()) {
 			  
@@ -160,12 +136,49 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		PreparedStatement stm= null;
 		ResultSet result= null;
 		
-		String select="SELECT * FROM book WHERE author="+"'"+author+"'";
+		String query="SELECT * FROM book WHERE author="+"'"+author+"'";
 		
 		ArrayList<String[]> books = new ArrayList<String[]>();
 		
-		stm =  (PreparedStatement) connection.prepareStatement(select);
-	    result = stm.executeQuery(select);
+		stm =  (PreparedStatement) connection.prepareStatement(query);
+	    result = stm.executeQuery(query);
+	    
+	
+		while(result.next()) {
+			  
+			  String[] oneBook = new String[50];
+			  String x=result.getString(1);
+			  String y=result.getString(2);
+			  String z=result.getString(3);
+			  String k=result.getString(4);
+			  String q=result.getString(5);
+			  String w=result.getString(6);
+			  oneBook[0]=x;
+			  oneBook[1]=y;
+			  oneBook[2]=z;
+			  oneBook[3]=k;
+			  oneBook[4]=q;
+			  oneBook[5]=w;
+			  
+			  books.add(oneBook);
+		}
+		
+		return books;
+		
+    }
+    
+    public ArrayList<String[]> filterBooksByStatus(String status) throws ClassNotFoundException, SQLException{
+
+		Connection connection= (Connection) DBconnector.getConnection();
+		PreparedStatement stm= null;
+		ResultSet result= null;
+		
+		String query="SELECT * FROM book WHERE status="+"'"+status+"'";
+		
+		ArrayList<String[]> books = new ArrayList<String[]>();
+		
+		stm =  (PreparedStatement) connection.prepareStatement(query);
+	    result = stm.executeQuery(query);
 	    
 	
 		while(result.next()) {
@@ -191,6 +204,7 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		
     }
 
+
     
     public ArrayList<String[]> filterBooksByGenre(String genre) throws ClassNotFoundException, SQLException{
 
@@ -198,11 +212,11 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		PreparedStatement stm= null;
 		ResultSet result= null;
 		
-		String select="SELECT * FROM book WHERE genre="+"'"+genre+"'";
+		String query="SELECT * FROM book WHERE genre="+"'"+genre+"'";
 
 		ArrayList<String[]> books = new ArrayList<String[]>(); 
-		stm =  (PreparedStatement) connection.prepareStatement(select);
-	    result = stm.executeQuery(select);
+		stm =  (PreparedStatement) connection.prepareStatement(query);
+	    result = stm.executeQuery(query);
 	    
 	    while(result.next()) {
 			  
@@ -234,11 +248,11 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		PreparedStatement stm= null;
 		ResultSet result= null;
 		
-		String select="SELECT * FROM book WHERE release_date="+"'"+date+"'";
+		String query="SELECT * FROM book WHERE release_date="+"'"+date+"'";
 		
 		ArrayList<String[]> books = new ArrayList<String[]>(); 
-		stm =  (PreparedStatement) connection.prepareStatement(select);
-	    result = stm.executeQuery(select);
+		stm =  (PreparedStatement) connection.prepareStatement(query);
+	    result = stm.executeQuery(query);
 	    
 	    while(result.next()) {
 			  
@@ -270,10 +284,10 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		PreparedStatement stm= null;
 		ResultSet result= null;
 		
-		String select="SELECT title FROM book WHERE rating >80 LIMIT 1";
+		String query="SELECT title FROM book WHERE rating >80 LIMIT 1";
 		
-		stm =  (PreparedStatement) connection.prepareStatement(select);
-	    result = stm.executeQuery(select);
+		stm =  (PreparedStatement) connection.prepareStatement(query);
+	    result = stm.executeQuery(query);
 	    
 	    while(result.next()) {
 			  return result.getString(1);
@@ -288,10 +302,10 @@ protected static final Logger LOGGER = Logger.getLogger(UserDao.class.getName())
 		PreparedStatement stm= null;
 		ResultSet result= null;
 		
-		String select="SELECT title FROM book WHERE genre='Romance' LIMIT 1";
+		String query="SELECT title FROM book WHERE genre='Romance' LIMIT 1";
 		
-		stm =  (PreparedStatement) connection.prepareStatement(select);
-	    result = stm.executeQuery(select);
+		stm =  (PreparedStatement) connection.prepareStatement(query);
+	    result = stm.executeQuery(query);
 	    
 	    while(result.next()) {
 			  return result.getString(1);

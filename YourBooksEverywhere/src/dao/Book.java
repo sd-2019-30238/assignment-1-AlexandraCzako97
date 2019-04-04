@@ -11,6 +11,7 @@ public class Book {
 	private String status;
 	private String rating;
 	
+	
 	public String getRating() {
 		return rating;
 	}

@@ -14,9 +14,13 @@ import javax.swing.table.TableColumnModel;
 import businessLogic.BookLogic;
 import businessLogic.Recommend;
 import businessLogic.RecommendFactory;
+import businessLogic.UserLogic;
 import dao.Book;
 
 import dao.BookDao;
+import dao.User;
+import dao.UserDao;
+
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTextArea;
@@ -36,6 +40,7 @@ public class SearchPage {
 	private JTable table;
 	private JTextField textField;
 	private JTable table_1;
+	private JTable table_2;
 
 	/**
 	 * Launch the application.
@@ -66,7 +71,7 @@ public class SearchPage {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 512, 439);
+		frame.setBounds(100, 100, 512, 619);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -78,6 +83,10 @@ public class SearchPage {
 		
 		frame.getContentPane().add(table_1);
 		
+		table_2 = new JTable();
+		table_2.setAutoscrolls(true);
+		table_2.setBounds(48, 435, 408, 144);
+		frame.getContentPane().add(table_2);
 		
 		JTextArea txtrSortBy = new JTextArea();
 		txtrSortBy.setEditable(false);
@@ -158,28 +167,41 @@ public class SearchPage {
 		btnSortBooks.setBounds(320, 120, 100, 23);
 		frame.getContentPane().add(btnSortBooks);
 		
-		JButton btnAddToMy = new JButton("Add to my library");
-		btnAddToMy.setBounds(330, 309, 123, 23);
-		frame.getContentPane().add(btnAddToMy);
-		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(48, 343, 408, 22);
+		textArea.setBounds(48, 376, 408, 22);
 		frame.getContentPane().add(textArea);
 		
-		JButton btnGoToMy = new JButton("Go to my library");
-		btnGoToMy.addActionListener(new ActionListener() {
+		
+		JButton btnAddToMy = new JButton("Add to my library");
+		btnAddToMy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
+				BookLogic book = new BookLogic();
 				
-				MyLibrary log= new MyLibrary();
-				log.newScreenLibrary();
-				//frame.setVisible(false);
+				ArrayList<String[]>bb = new ArrayList<String[]>();
+				DefaultTableModel model2= new DefaultTableModel();
+				
+				String[] columns= {"Title", "Author", "Genre", "Release Date","Price","Status"};
+				int n =columns.length;
+				try {
+					bb=book.statusBook("free");
+				} catch (ClassNotFoundException | SQLException e1) {
+					e1.printStackTrace();
+				}
+				for(int i=0;i<n;i++) {
+					model2.addColumn(columns[i]);
+			    }
+			    for(String[] b: bb) {
+				    model2.addRow(b);
+			    }
+				
+			    table_2.setModel(model2);
+              
 			}
 		});
-		btnGoToMy.setBounds(266, 376, 190, 23);
-		frame.getContentPane().add(btnGoToMy);
+		btnAddToMy.setBounds(270, 309, 186, 23);
+		frame.getContentPane().add(btnAddToMy);
 		
-		
-
 		
 		JButton btnNewButton = new JButton("All books");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -207,7 +229,7 @@ public class SearchPage {
               
 			}
 		});
-		btnNewButton.setBounds(51, 376, 212, 23);
+		btnNewButton.setBounds(48, 309, 212, 23);
 		frame.getContentPane().add(btnNewButton);
 		
 		JSpinner spinner_1 = new JSpinner();
@@ -251,7 +273,7 @@ public class SearchPage {
 		txtrRecommendedBook.setFont(new Font("Dialog", Font.PLAIN, 13));
 		txtrRecommendedBook.setEditable(false);
 		txtrRecommendedBook.setBackground(SystemColor.menu);
-		txtrRecommendedBook.setBounds(48, 310, 190, 22);
+		txtrRecommendedBook.setBounds(48, 343, 190, 22);
 		frame.getContentPane().add(txtrRecommendedBook);
 		
 		JTextArea txtrSearchBooksBy = new JTextArea();
@@ -261,6 +283,16 @@ public class SearchPage {
 		txtrSearchBooksBy.setBackground(SystemColor.menu);
 		txtrSearchBooksBy.setBounds(98, 55, 106, 22);
 		frame.getContentPane().add(txtrSearchBooksBy);
+		
+
+		
+		JTextArea txtrMyLibrary = new JTextArea();
+		txtrMyLibrary.setText("My Library:");
+		txtrMyLibrary.setFont(new Font("Dialog", Font.PLAIN, 13));
+		txtrMyLibrary.setEditable(false);
+		txtrMyLibrary.setBackground(SystemColor.menu);
+		txtrMyLibrary.setBounds(48, 402, 190, 22);
+		frame.getContentPane().add(txtrMyLibrary);
 
 	}
 }

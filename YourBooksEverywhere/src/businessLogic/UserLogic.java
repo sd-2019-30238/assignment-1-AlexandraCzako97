@@ -28,6 +28,20 @@ public class UserLogic {
 		return 1;
 	}
 	
+	public int validatedPayment(String username) throws ClassNotFoundException, SQLException {
+		User usr= new User();
+		
+		usr.setUsername(username);
+		
+		UserDao usrDao= new UserDao();
+		String usersNumber=usrDao.validatedPayment(usr);
+		
+		if(usersNumber=="no") {
+			return 0;
+		}
+		return 1;
+	}
+	
 	public int validateUserRegister(String username, String password) throws ClassNotFoundException, SQLException {
 		User usr= new User();
 		
