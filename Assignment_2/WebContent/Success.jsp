@@ -42,6 +42,7 @@ input[type=submit]:hover {
 
 <body>
 <h1> Successfully logged in!</h1>
+<h2> Continue the adventure:<a href="BookList.jsp">>>Search the library</a></h2>
 <br><br>
 
 <br><br>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>RegisterPage</title>
+<title>LoginPage</title>
 <style>
 body {font-family: Arial;
       background-image: url("login.jpeg");
@@ -26,7 +26,7 @@ input[type=text], select, textarea {
 input[type=submit] {
   background-color: #CD5C5C;
   color: white;
-  padding: 12px 165px;
+  padding: 12px 71px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -37,23 +37,13 @@ input[type=submit]:hover {
   background-color: #B22222;
 
 }
-
 </style>
 </head>
+
 <body>
-<h1> Register here:</h1>
+<h1> Failed to login/register!</h1>
 <br><br>
 
-<form action="Register" method="post">
-
-    <b>Username:</b>   &nbsp <input type="text" name="username"/><br>
-    <b>Password1:</b>   <input type="text" name="password" /><br>
-    <b>Password2:</b>    <input type="text" name="password" /><br>
-    <b>Payment plan:</b>    <input type="radio" name="plan" value="monthly"/>Monthly
-                            <input type="radio" name="plan" value="yearly"/>Yearly<br><br>
-    <input type="submit" value="Register"/>
-
-</form>
-
+<br><br>
 </body>
 </html>

@@ -1,0 +1,162 @@
+body{
+    background: #fff;
+    margin: 0;
+    font-family: Quicksand;
+    padding:0;
+    
+}
+
+nav{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100px;
+    padding: 25px, 100px;
+    box-sizing: border-box;
+    transition: .3s;
+}
+
+nav.black{
+	background: rgba(0,0,0,0.8);
+	height: 75px;
+	padding: 25px 100px;
+}
+
+nav.logo{
+	padding: 22px 20px;
+	height: 80px;
+	float:left;
+	font-size: 24px;
+	transition: .3s;
+}
+
+nav.black.logo{
+	color: #fff;
+}
+
+nav ul{
+	list-style: none;
+	float: right;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	
+}
+
+nav ul li{
+	list-style: none;
+}
+
+nav ul li a{
+	line-heignt: 80px;
+	color: #151515;
+	padding: 12px 30px;
+	text-decoration: none;
+	text-transformation: uppercase;
+	transition: .1s;
+	
+}
+
+nav.black ul li a{
+	color:#fff;
+}
+
+nav ul li a:focus{
+	outine: none;
+	
+}
+
+nav ul li a.active{
+	background: #DB0101;
+	color: #fff;
+	border-radius: 6px;
+}
+
+section.sec1{
+	width: 100%;
+	height: 100vh;
+	background: url(bookstore.jpeg);
+	background-size: cover;
+	background-position: center;
+}
+
+section.sec2{
+	width: 100%;
+	height: 100vh;
+	background: url(buy.jpeg);
+	background-size: cover;
+	background-position: center;
+	
+}
+section.section2{
+	margin-top: 80px;
+}
+
+section.section2 p{
+	width:900px;
+	margin: 30px auto;
+	text-align: justify;
+	font-size: 18px;
+	line-heignt: 30px;
+	
+}
+
+section.sec3{
+	width: 100%;
+	height: 100vh;
+	background: url(credit.jpeg);
+	background-size: cover;
+	background-position: center;
+	
+}
+
+section.sec4{
+	width: 100%;
+	height: 100vh;
+	background: url(contact.jpg);
+	background-size: cover;
+	background-position: center;
+	
+}
+
+
+.btn{
+	background-color: #DB0101;
+	color: #fff;
+	width: 250px;
+	border-radius: 6px;
+	border:none;
+	padding: 14px 40px;
+	text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+	
+}
+.btn:hover{
+	 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.span3{
+	font-size: 14px;
+}
+
+.menuitem{
+    background-color: #ececfa;
+    display:block;
+    padding: 4% 4%;
+    border-bottom:1px solid #a7a7ad;
+    padding-left: 4%;
+}
+
+.menuitem:hover{
+    cursor:pointer;
+    background-color: #ffffff;
+}
+
+.section22{
+    width:68vw;
+    display:inline-block;
+    
+}

@@ -57,5 +57,30 @@ public class DBconnector {
 				System.out.println("Closed");
 		
 		}
+
+/*private static Connection connection;
+	
+	static{
+		
+		try{
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/bookstore", "root", "ada123");
+			if(connection!=null) {
+				System.out.println("Successfully connected!");
+			}else {
+				System.out.println("NOT connected!");
+			}
+		}catch(ClassNotFoundException e){ 		
+			
+		}catch(SQLException e){ 
+				
+		}	
+	}
+
+	public static Connection getConnection() {
+		return connection;
+	}
+*/
 		
 }
