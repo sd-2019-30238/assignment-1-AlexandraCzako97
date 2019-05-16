@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Date;
+import java.util.ArrayList;
 
 public class Book {
 	private String title;
@@ -68,7 +68,13 @@ public class Book {
 	public void setRelease_date(String release_date2) {
 		this.release_date = release_date2;
 	}
-
+	public boolean check(ArrayList<String> cart, String secondBook) {
+		for(String book : cart) {
+			if(book.equals(secondBook))
+				return true;
+		}
+		return false;
+	}
 	
 
 }

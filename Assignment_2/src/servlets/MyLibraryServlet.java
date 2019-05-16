@@ -3,56 +3,52 @@ package servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
 import dataAccess.BookDao;
 import model.Book;
 
-
-public class BooksServlet extends HttpServlet {
+public class MyLibraryServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
-	private static String BOOKLIST = "/BookList.jsp";
-	ArrayList<Book> myBooks = new ArrayList<>();
 	HttpSession session;
 	ArrayList<String> cartlist = new ArrayList<>();
 
-	public BooksServlet() {
+	public MyLibraryServlet() {
 		super();
 	
 		
 	}
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		session = request.getSession();
+		String action = request.getParameter("action");
+		System.out.println("book not added yet");
 		try {
-			myBooks = BookDao.showAllBooks();
-	
-			session = request.getSession();
-			session.setAttribute("allBooks",myBooks);
-			
+			Book book=BookDao.searchBook((String) request.getAttribute("title"));
+			if(book.getStatus()=="free") {
+				cartlist.add(book.getTitle());
+				session.setAttribute("cartlist", cartlist);
+				response.sendRedirect("cartlist");
+				System.out.println("book added");
+				request.getRequestDispatcher("/MyLibrary.jsp").forward(request, response);
+			}else {
+				response.sendRedirect("TakenBook.jsp");
+			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		
-		request.getRequestDispatcher(BOOKLIST).forward(request, response);
-	
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		doGet(request,response);		
-		
+		doGet(request, response);
 	}
 
 

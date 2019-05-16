@@ -59,5 +59,6 @@ public class User {
 	public void setPayment_plan(String payment_plan) {
 		this.payment_plan = payment_plan;
 	}
+	
 
 }

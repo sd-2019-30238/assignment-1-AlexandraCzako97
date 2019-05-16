@@ -41,4 +41,25 @@
      <servlet-name>BookServ</servlet-name>
      <url-pattern>/BookList</url-pattern>
   </servlet-mapping>
+  
+  
+  <servlet>
+     <servlet-name>MyLib</servlet-name>
+     <servlet-class>servlets.MyLibraryServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+     <servlet-name>MyLib</servlet-name>
+     <url-pattern>/MyLibrary</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+     <servlet-name>Adm</servlet-name>
+     <servlet-class>servlets.AdminServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+     <servlet-name>Adm</servlet-name>
+     <url-pattern>/Admin</url-pattern>
+  </servlet-mapping>
 </web-app>
