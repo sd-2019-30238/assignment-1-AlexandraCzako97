@@ -1,6 +1,5 @@
 package model;
 
 public interface Observer {
-	void update(String title, String status);
-
+	void next(String title, String status);
 }

@@ -15,7 +15,7 @@ import model.Observer;
 import model.User;
 import model.Util;
 
-public class BeforeServlet extends HttpServlet implements Observer{
+public class BeforeStatusServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -26,6 +26,7 @@ public class BeforeServlet extends HttpServlet implements Observer{
 		HttpSession session = request.getSession();
 
 		User user =Util.getLoggedUser(session);
+		System.out.println("Logged in user:"+user.getUsername());
 		try {
 			try {
 				request.setAttribute("borrowed", BookDao.showAllBooksWithTitle(user.getUsername()));
@@ -43,16 +44,16 @@ public class BeforeServlet extends HttpServlet implements Observer{
 		doGet(request, response);
 	}
 
-	@Override
-	public void update(String title, String status) {
-		AdminDao admDao= new AdminDao();
-		try {
-			admDao.updateStatus(title, status);
-			System.out.println("Status updated now!");
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
+//	@Override
+//	public void update(String title, String status) {
+//		AdminDao admDao= new AdminDao();
+//		try {
+//			admDao.updateStatus(title, status);
+//			System.out.println("Status updated now!");
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
 
 }

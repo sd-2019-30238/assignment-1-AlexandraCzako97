@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dataAccess.AdminDao;
 import dataAccess.BookDao;
 import dataAccess.DBconnector;
 import model.Book;
@@ -19,6 +20,10 @@ public class Test {
 		for(int i=0;i<allBooks.size();i++) {
 			System.out.println(allBooks.get(i).getTitle());
 		}
+		
+		AdminDao admD=new AdminDao();
+		admD.updateStatus("Gone With The Wind", "free");
+		
 
 
 	}

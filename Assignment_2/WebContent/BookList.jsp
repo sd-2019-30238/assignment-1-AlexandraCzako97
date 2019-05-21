@@ -49,7 +49,19 @@ function addRow(title,price)
     td.innerHTML = price;
     tr.appendChild(td);
     ptable.appendChild(tr);
-
+    
+    /*var checkoutForm = document.getElementById('checkoutForm');
+    var titleInput = checkoutForm.querySelector('input[name="title"]');
+    var statusInput = checkoutForm.querySelector('input[name="status"]');
+    titleInput.value = title;
+    statusInput.value = "TAKEN";*/
+    
+    
+    var returnForm = document.getElementById('returnForm');
+    var titleInput = returnForm.querySelector('input[name="title"]');
+    var statusInput = returnForm.querySelector('input[name="status"]');
+    titleInput.value = title;
+    statusInput.value = "FREE";
   }
 
 
@@ -154,7 +166,7 @@ th {
 				<td>${book.genre}</td>
 				<td>${book.release_date}</td>
 				<td>${book.price}</td>
-				<td><input type="button" value="Add" onclick="addRow('${book.title}', '${book.price}');" class="button"></td>
+				<td><input type="button" value="Add" onclick="addRow(`${book.title}`, '${book.price}');" class="button"></td>
 
 </tr>
 		</c:forEach>
@@ -172,7 +184,19 @@ th {
 		</tr>
 	</table>
 
-
+<br><br><br>
+ <!--<form method="post" action="Checkout" id="checkoutForm">
+    <input type="text" name="title" hidden>
+    <input type="text" name="status" hidden>
+	<input type="submit" value="Check Out"  class="button">
+</form>
+<br><br><br>-->
+<form method="post" action="Return" id="returnForm">
+    <input type="text" name="title" hidden>
+    <input type="text" name="status" hidden>
+	<input type="submit" value="Return book"  class="button">
+</form>
+<br><br><br>
 
 
 </body>

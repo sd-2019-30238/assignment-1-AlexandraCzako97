@@ -46,12 +46,16 @@ public class BooksServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(BOOKLIST).forward(request, response);
+		//RequestDispatcher view = request.getRequestDispatcher(BOOKLIST);
+		//view.forward(request, response);
 	
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		doGet(request,response);		
+		RequestDispatcher view = request.getRequestDispatcher(BOOKLIST);
+		view.forward(request, response);		
+		//doGet(request,response);
 		
 	}
 

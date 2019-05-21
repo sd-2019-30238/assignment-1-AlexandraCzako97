@@ -62,4 +62,24 @@
      <servlet-name>Adm</servlet-name>
      <url-pattern>/Admin</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+     <servlet-name>Hist</servlet-name>
+     <servlet-class>servlets.BeforeStatusServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+     <servlet-name>Hist</servlet-name>
+     <url-pattern>/borrowedStatus</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+     <servlet-name>Ret</servlet-name>
+     <servlet-class>servlets.StatusServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+     <servlet-name>Ret</servlet-name>
+     <url-pattern>/Return</url-pattern>
+  </servlet-mapping>
 </web-app>

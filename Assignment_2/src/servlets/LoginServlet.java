@@ -21,6 +21,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserDao usrDao;
 	private AdminDao adminDao;
+	private static String URL_PREFIX =  "/Assignment_2";
 	private static String USER_LOGIN = "/Login.jsp";
 	private static String LOGIN_SUCCESS = "/BookList.jsp";
 	private static String LOGIN_ADMIN = "/Admin.jsp";
@@ -59,18 +60,18 @@ public class LoginServlet extends HttpServlet {
 			e.printStackTrace();
 		}
          if (result == true) {
-             forward = LOGIN_SUCCESS;
+             forward = URL_PREFIX + LOGIN_SUCCESS;
          }
              else {
             	 if (result_admin==true) {
-            		 forward = LOGIN_ADMIN;
+            		 forward = URL_PREFIX + LOGIN_ADMIN;
             	 }else {
-                         forward = LOGIN_FAILURE;
+                         forward = URL_PREFIX + LOGIN_FAILURE;
                  }
              }
-     
-         RequestDispatcher view = request.getRequestDispatcher(forward);
-         view.forward(request, response);
+     response.sendRedirect(forward.replace(".jsp", ""));
+//         RequestDispatcher view = request.getRequestDispatcher(forward);
+//         view.forward(request, response);
 	}
 
 

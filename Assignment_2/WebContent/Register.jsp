@@ -47,8 +47,7 @@ input[type=submit]:hover {
 <form action="Register" method="post">
 
     <b>Username:</b>   &nbsp <input type="text" name="username"/><br>
-    <b>Password1:</b>   <input type="text" name="password" /><br>
-    <b>Password2:</b>    <input type="text" name="password" /><br>
+    <b>Password:</b>   <input type="password" name="password" /><br>
     <b>Payment plan:</b>    <input type="text" name="payment_plan" /> (Choose from: "monthly" or "yearly")<br> 
     <input type="submit" value="Register"/>
 
