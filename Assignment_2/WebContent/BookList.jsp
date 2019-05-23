@@ -60,8 +60,10 @@ function addRow(title,price)
     var returnForm = document.getElementById('returnForm');
     var titleInput = returnForm.querySelector('input[name="title"]');
     var statusInput = returnForm.querySelector('input[name="status"]');
+    var emailInput = returnForm.querySelector('input[name="email"]');
     titleInput.value = title;
     statusInput.value = "FREE";
+    emailInput.value = "testmailps123@gmail.com";
   }
 
 
@@ -191,11 +193,17 @@ th {
 	<input type="submit" value="Check Out"  class="button">
 </form>
 <br><br><br>-->
-<form method="post" action="Return" id="returnForm">
+ <!--<form method="post" action="Return" id="returnForm">
     <input type="text" name="title" hidden>
     <input type="text" name="status" hidden>
 	<input type="submit" value="Return book"  class="button">
-</form>
+</form>-->
+<form method="post" action="Return" id="returnForm">
+    <input type="text" name="title" hidden>
+    <input type="text" name="status" hidden>
+    <input type="text" name="email" hidden>
+	<input type="submit" value="Return book"  class="button">
+
 <br><br><br>
 
 

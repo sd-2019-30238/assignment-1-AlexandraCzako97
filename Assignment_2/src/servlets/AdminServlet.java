@@ -42,22 +42,22 @@ public class AdminServlet extends HttpServlet {
         String forward = "";
         boolean insert=false;
 		
-	    try {
+	 //   try {
 	    	/*insert=admDao.insertBook( req.getParameter("title"),  req.getParameter("author"),
 	    			 req.getParameter("genre"),  req.getParameter("release_date"), 
 	    			 req.getParameter("price"),  req.getParameter("status"),  req.getParameter("rating"));*/
-	    	admDao.updateStatus(req.getParameter("title"), req.getParameter("status"));
-			
-			forward=REGISTER_SUCCESS;
-		} catch (ClassNotFoundException | SQLException e) {
-			forward=REGISTER_FAILURE;
-			e.printStackTrace();
-		}
-	    if(insert) System.out.println("New book inserted!");
-
-		
-         RequestDispatcher view = req.getRequestDispatcher(forward);
-         view.forward(req, response);
+//	    	admDao.updateStatus(req.getParameter("title"), req.getParameter("status"));
+//			
+//			forward=REGISTER_SUCCESS;
+//		} catch (ClassNotFoundException | SQLException e) {
+//			forward=REGISTER_FAILURE;
+//			e.printStackTrace();
+//		}
+//	    if(insert) System.out.println("New book inserted!");
+//
+//		
+//         RequestDispatcher view = req.getRequestDispatcher(forward);
+//         view.forward(req, response);
 	}
 
 

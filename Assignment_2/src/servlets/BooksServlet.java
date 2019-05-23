@@ -24,6 +24,7 @@ public class BooksServlet extends HttpServlet {
 
 	private static String BOOKLIST = "/BookList.jsp";
 	ArrayList<Book> myBooks = new ArrayList<>();
+	BookDao availableBooks = new BookDao();
 	HttpSession session;
 	ArrayList<String> cartlist = new ArrayList<>();
 
@@ -35,9 +36,24 @@ public class BooksServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String title = request.getParameter("title");
+		String username = request.getParameter("username");
+		
+		try {
+			if (availableBooks.checkAvailability(title)) {
+				BookDao.insertBookReading(title, username);
+			}
+			else {
+				BookDao.insertBookWaiting(title, username);
+			}
+		} catch (ClassNotFoundException | SQLException e1) {
+			
+			e1.printStackTrace();
+		}
+		
 		try {
 			myBooks = BookDao.showAllBooks();
-	
+			
 			session = request.getSession();
 			session.setAttribute("allBooks",myBooks);
 			

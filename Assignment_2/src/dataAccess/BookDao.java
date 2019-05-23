@@ -43,24 +43,34 @@ public class BookDao {
 
 	}
 	
-	 public void insertUser(String title, String author, String genre, String release_date, String price, String status, String rating ) throws SQLException, ClassNotFoundException {
+	 public static void insertBookReading(String title, String username) throws SQLException, ClassNotFoundException {
 	    Class.forName("com.mysql.cj.jdbc.Driver");
 	    Connection cnx = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/bookstore","root","ada123");
-	    pr =  (PreparedStatement) cnx.prepareStatement("insert into book(title,author,genre,release_date,price,status,rating) values (?,?,?,?,?,?,?)");
+	    pr =  (PreparedStatement) cnx.prepareStatement("insert into readingList(username, title) values (?,?)");
 				
 		pr.setString(1,title);
-		pr.setString(2,author);
-		pr.setString(3,genre);
-		pr.setString(4,release_date);
-		pr.setString(5,price);
-		pr.setString(6,status);
-		pr.setString(7,rating);
+		pr.setString(2, username);
 		      
 				   
 		pr.executeUpdate();
-		System.out.println("book inserted");
+		System.out.println("book inserted in reading list");
 		pr.close();
 	 }
+	 
+	 public static void insertBookWaiting(String title, String username) throws SQLException, ClassNotFoundException {
+		    Class.forName("com.mysql.cj.jdbc.Driver");
+		    Connection cnx = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/bookstore","root","ada123");
+		    pr =  (PreparedStatement) cnx.prepareStatement("insert into waitingList(username, title) values (?,?)");
+					
+			pr.setString(1,title);
+			pr.setString(2, username);
+			      
+					   
+			pr.executeUpdate();
+			System.out.println("book inserted in reading list");
+			pr.close();
+		 }
+		 
 	 
 	 
 	 public void updateStatus(String title, String status) throws SQLException, ClassNotFoundException {
@@ -71,7 +81,7 @@ public class BookDao {
 			pr.setString(1,title);
 			pr.setString(6,status);
 			      
-					   
+				   
 			pr.executeUpdate();
 			System.out.println("book updateeeed");
 			pr.close();
@@ -170,6 +180,19 @@ public class BookDao {
 		 
 		 return allBooks;
 	 }
+	 
+	 public boolean checkAvailability(String title) throws ClassNotFoundException, SQLException {
+		    Class.forName("com.mysql.cj.jdbc.Driver");
+		    Connection cnx = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/bookstore","root","ada123");
+		    pr =  (PreparedStatement) cnx.prepareStatement("Select title from book where title = ? and status='free'");
+		    
+			pr.setString(1, title);
+			pr.executeUpdate();
+			System.out.println(title+"is FREE for everyone!");
+			
+			pr.close();
+			return true;
+		}
 			
 
 }

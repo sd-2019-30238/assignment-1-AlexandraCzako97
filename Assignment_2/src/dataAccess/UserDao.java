@@ -46,6 +46,8 @@ public class UserDao {
 		System.out.println("user inserted");
 		pr.close();
 	 }
+	 
+	
 					   
 			 
 				   

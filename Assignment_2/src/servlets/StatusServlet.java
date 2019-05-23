@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dataAccess.AdminDao;
 import dataAccess.BookDao;
 import model.App;
 import model.Observer;
@@ -27,15 +28,33 @@ public class StatusServlet extends HttpServlet {
 	
 	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String title=request.getParameter("title");
-		String status=request.getParameter("status");
-		App.StatusObserver.next(title, status);
+
 		RequestDispatcher reqDisp= request.getRequestDispatcher("Return.jsp");
 		reqDisp.forward(request, response);
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+		String title=request.getParameter("title");
+		String status=request.getParameter("status");
+		String email=request.getParameter("email");
+		
+		
+		AdminDao adm= new AdminDao();
+		String email1=null;
+		try {
+			email1 = adm.getEmail(title);
+		} catch (ClassNotFoundException | SQLException e1) {
+			System.out.println("cartea nu se afla in lista ta de carti!!!!");
+			
+		}
+		try {
+			App.StatusObserver.next(title);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }
