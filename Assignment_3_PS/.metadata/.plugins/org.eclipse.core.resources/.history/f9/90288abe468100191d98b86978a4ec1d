@@ -1,0 +1,6 @@
+package CQRS.ReadModel;
+
+public class ValidateLogin {
+	
+
+}

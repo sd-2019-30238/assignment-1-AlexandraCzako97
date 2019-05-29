@@ -1,0 +1,6 @@
+package CQRS.Handlers;
+
+public interface IHandler {
+	
+
+}

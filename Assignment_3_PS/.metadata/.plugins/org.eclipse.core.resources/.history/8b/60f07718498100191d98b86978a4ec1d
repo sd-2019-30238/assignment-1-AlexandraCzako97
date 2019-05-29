@@ -1,0 +1,5 @@
+package CQRS.Handlers;
+
+public class UpdateBookHandler {
+
+}

@@ -1,0 +1,5 @@
+package CQRS.ReadModel;
+
+public class FindUser {
+
+}

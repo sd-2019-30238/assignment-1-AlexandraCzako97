@@ -1,0 +1,8 @@
+package CQRS.WriteModel;
+
+import model.Mediator;
+
+public class BookWriteModel {
+	private Mediator mediator;
+
+}

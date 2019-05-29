@@ -1,0 +1,9 @@
+package CQRS.Handlers;
+
+import CQRS.WriteModel.ICommand;
+
+public interface IHandle {
+	public String getCommandType(ICommand command);
+	public String handler();
+
+}

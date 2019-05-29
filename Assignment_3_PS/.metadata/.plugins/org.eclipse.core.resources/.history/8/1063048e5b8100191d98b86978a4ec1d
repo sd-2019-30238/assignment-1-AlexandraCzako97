@@ -1,0 +1,6 @@
+package CQRS.WriteModel;
+
+public interface ICommand {
+	String getCommandType();
+
+}

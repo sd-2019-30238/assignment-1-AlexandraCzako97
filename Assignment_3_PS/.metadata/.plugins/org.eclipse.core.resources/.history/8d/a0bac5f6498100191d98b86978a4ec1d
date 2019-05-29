@@ -1,0 +1,8 @@
+package CQRS.WriteModel;
+
+public class UpdateBookCommand {
+	private String commandType;
+	private String status;
+	private int price;
+
+}

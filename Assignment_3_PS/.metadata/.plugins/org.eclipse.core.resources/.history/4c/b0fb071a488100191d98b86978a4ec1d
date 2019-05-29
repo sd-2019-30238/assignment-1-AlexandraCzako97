@@ -1,0 +1,27 @@
+package tests;
+
+import java.sql.SQLException;
+
+import CQRS.ReadModel.ValidateBook;
+import CQRS.ReadModel.ValidateLogin;
+import model.DBconnector;
+
+public class Test {
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		
+		//database connection test
+		System.out.println(DBconnector.getConnection());
+		
+		//validate login
+		ValidateLogin vl= new ValidateLogin();
+		//vl.searchUser("alexandra.czako", "aaa123");
+		
+		//validate book
+		ValidateBook vb = new ValidateBook();
+		//vb.searchBook("Gone With The Wind");
+		
+		
+	}
+
+}

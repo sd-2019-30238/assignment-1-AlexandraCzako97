@@ -1,0 +1,19 @@
+package CQRS.Handlers;
+
+import CQRS.WriteModel.ICommand;
+
+public class AddUserHandler implements IHandler{
+
+	@Override
+	public String handler(ICommand command) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getCommandType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

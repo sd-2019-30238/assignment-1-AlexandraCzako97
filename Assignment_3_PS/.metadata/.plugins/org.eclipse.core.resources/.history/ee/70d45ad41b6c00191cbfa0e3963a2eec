@@ -1,0 +1,4 @@
+dbDriver=com.mysql.jdbc.Driver
+connectionUrl=jdbc:mysql://localhost:3307/bookstore
+userName=root
+password=ada123

@@ -1,0 +1,39 @@
+package CQRS.ReadModel;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import model.Book;
+
+public class FindBook {
+	private static PreparedStatement pr = null;
+public static Book searchBook(String title) throws SQLException, ClassNotFoundException {
+		
+	    Class.forName("com.mysql.cj.jdbc.Driver");
+	    Connection cnx = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/bookstore","root","ada123");
+		pr =  (PreparedStatement) cnx.prepareStatement("SELECT COUNT(title) AS num FROM book WHERE title="+"'"+title+"'");
+		ResultSet rs = pr.executeQuery();
+		
+		while(rs.next()) {
+			 String titlee= rs.getString(1);
+			 String author= rs.getString(2);
+			 String genre= rs.getString(3);
+			 String release_date= rs.getString(4);
+			 String price= rs.getString(5);
+			 String status= rs.getString(6);
+			 String rating= rs.getString(7);
+			 
+			 Book book= new Book();
+			 book.setTitle(titlee);
+
+			 return book;
+			
+		}
+		return null;
+
+	}
+
+}

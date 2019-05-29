@@ -1,0 +1,33 @@
+package CQRS.Handlers;
+
+import CQRS.WriteModel.AddBookCommand;
+import CQRS.WriteModel.ICommand;
+import model.Book;
+
+public class AddBookHandler implements IHandler{
+	
+	private String commandType;
+	
+	public String getCommandType() {
+		return commandType;
+	}
+
+
+	public void setCommandType(String commandType) {
+		this.commandType = commandType;
+	}
+	
+	public AddBookHandler() {
+		this.commandType="updateBook";
+	}
+
+
+	@Override
+	public String handler(ICommand command) {
+		
+		return null;
+	}
+
+
+
+}

@@ -1,0 +1,21 @@
+package CQRS.WriteModel;
+
+public class UpdateBookCommand implements ICommand {
+	private String commandType;
+	private String status;
+	private int price;
+	
+	UpdateBookCommand(String status, int price){
+		this.commandType="updatebook";
+		this.status=status;
+		this.price=price;
+	}
+	
+	@Override
+	public String getCommandType() {
+		return null;
+	}
+	
+	
+
+}

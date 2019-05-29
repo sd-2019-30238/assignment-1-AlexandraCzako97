@@ -1,0 +1,11 @@
+package model;
+
+public class MailingObserver implements Observer {
+
+	@Override
+	public void next(String title, String status) {
+		// TODO Auto-generated method stub
+		System.out.println("Am primit notificare: " + title + " " + status);
+	}
+
+}

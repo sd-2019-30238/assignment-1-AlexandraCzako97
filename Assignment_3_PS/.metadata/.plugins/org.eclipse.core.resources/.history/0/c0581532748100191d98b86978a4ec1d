@@ -1,0 +1,36 @@
+package CQRS.Handlers;
+
+import java.sql.PreparedStatement;
+
+import CQRS.WriteModel.AddBookCommand;
+import CQRS.WriteModel.AddUserCommand;
+import CQRS.WriteModel.ICommand;
+
+import model.User;
+
+public class AddUserHandler implements IHandler{
+
+	private PreparedStatement pr = null;
+	private String commandType;
+	
+	public AddUserHandler() {
+		this.setCommandType("addUser");
+	}
+
+
+	@Override
+	public String handler(ICommand command) {
+		User user=((AddUserCommand) command).getUserDetails();
+		return null;
+	}
+
+	@Override
+	public String getCommandType() {
+		return commandType;
+	}
+	
+	public void setCommandType(String commandType) {
+		this.commandType=commandType;
+		
+	}
+}

@@ -1,0 +1,12 @@
+package CQRS.WriteModel;
+
+public class AddBookCommand implements ICommand{
+	ptivate Book bookDetails;
+
+	@Override
+	public String getCommandType() {
+		
+		return null;
+	}
+
+}

@@ -1,0 +1,15 @@
+package tests;
+
+import java.sql.SQLException;
+import model.DBconnector;
+
+public class Test {
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		
+		//database connection test
+		System.out.println(DBconnector.getConnection());
+		
+	}
+
+}

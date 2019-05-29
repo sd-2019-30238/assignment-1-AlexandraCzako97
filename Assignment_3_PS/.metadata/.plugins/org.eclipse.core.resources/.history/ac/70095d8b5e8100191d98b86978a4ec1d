@@ -1,0 +1,26 @@
+package CQRS.Handlers;
+
+import CQRS.WriteModel.ICommand;
+
+public class AddBookHandler implements IHandler {
+
+	private String commandType;
+	
+	public AddBookHandler() {
+	 
+	}
+	
+	@Override
+	public String handler(ICommand command) {
+		
+		return null;
+	}
+
+	@Override
+	public String getCommandType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+}

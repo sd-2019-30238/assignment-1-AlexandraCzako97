@@ -1,0 +1,24 @@
+package tests;
+
+import java.sql.SQLException;
+
+import CQRS.ReadModel.FindBook;
+import model.DBconnector;
+
+public class Test {
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		
+		//database connection test
+		System.out.println(DBconnector.getConnection());
+		
+		//find a specific book
+		FindBook fb= new FindBook();
+		fb.searchBook("Gone With The Wind");
+		fb.searchBook("Hello");
+
+		
+		
+	}
+
+}

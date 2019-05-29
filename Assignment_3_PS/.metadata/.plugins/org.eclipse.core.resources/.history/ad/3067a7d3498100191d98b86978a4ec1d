@@ -1,0 +1,5 @@
+package CQRS.WriteModel;
+
+public class UpdateBookCommand {
+
+}
