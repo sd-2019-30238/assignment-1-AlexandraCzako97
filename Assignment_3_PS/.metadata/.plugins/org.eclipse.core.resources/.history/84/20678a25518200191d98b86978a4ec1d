@@ -1,0 +1,9 @@
+package model;
+
+public class UnavailableDecorator extends Decorator{
+
+	public UnavailableDecorator(ITarget target) {
+		super(target);
+	}
+
+}

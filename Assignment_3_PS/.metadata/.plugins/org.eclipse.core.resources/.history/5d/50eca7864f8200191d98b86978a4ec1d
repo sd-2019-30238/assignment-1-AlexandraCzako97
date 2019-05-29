@@ -1,0 +1,10 @@
+package model;
+
+public class OwnedDecorator extends Decorator{
+
+	public OwnedDecorator(ITarget target) {
+		super(target);
+	}
+	
+
+}

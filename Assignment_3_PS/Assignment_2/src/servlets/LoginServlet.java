@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import CQRS.ReadModel.FindUser;
 import model.User;
-
 
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	FindUser findUser= new FindUser();
 
 	private static String URL_PREFIX =  "/Assignment_2";
 	private static String USER_LOGIN = "/Login.jsp";
@@ -40,9 +40,32 @@ public class LoginServlet extends HttpServlet {
 
 		String forward = "";
 		
-
+		boolean result=false;
+		boolean result_admin=false;
+		try {
+			result = findUser.searchUser(
+			         request.getParameter("username"),
+			         request.getParameter("password"));
+			result_admin=findUser.searchAdmin( 
+					 request.getParameter("username"),
+			         request.getParameter("password"));
 		
+		
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		 if (result == true) {
+             forward = URL_PREFIX + LOGIN_SUCCESS;
+         }
+             else {
+            	 if (result_admin==true) {
+            		 forward = URL_PREFIX + LOGIN_ADMIN;
+            	 }else {
+                         forward = URL_PREFIX + LOGIN_FAILURE;
+                 }
+             }
      response.sendRedirect(forward.replace(".jsp", ""));
+
 	}
 
 

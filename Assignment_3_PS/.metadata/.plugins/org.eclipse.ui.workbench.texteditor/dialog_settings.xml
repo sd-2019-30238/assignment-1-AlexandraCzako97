@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Cartea"/>
+		<item key="selection" value="BookList"/>
 		<list key="findhistory">
+			<item value="BookList"/>
 			<item value="cartea"/>
 			<item value="USER_LOGIN"/>
 			<item value="title"/>

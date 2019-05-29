@@ -22,6 +22,13 @@ public class Test {
 		FindUser fu=new FindUser();
 		fu.searchUser("alexandra.czako", "aaa123");
 		
+		FindUser fu2=new FindUser();
+		fu2.searchAdmin("admin", "admin");
+		
+		
+		FindBook fb2= new FindBook();
+		fb2.changeBookStatusToFree("Hamlet");
+		
 		
 	}
 
