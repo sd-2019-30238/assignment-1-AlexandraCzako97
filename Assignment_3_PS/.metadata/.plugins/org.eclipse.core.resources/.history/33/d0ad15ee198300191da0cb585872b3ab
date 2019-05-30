@@ -6,8 +6,8 @@ import CQRS.ReadModel.FindBook;
 
 public class OwnedDecorator extends Decorator{
 
-	public OwnedDecorator() {
-		super();
+	public OwnedDecorator(ITarget target) {
+		super(target);
 	}
 	
 	@Override

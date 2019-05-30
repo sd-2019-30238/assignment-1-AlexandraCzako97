@@ -68,7 +68,7 @@
   
    <servlet>
      <servlet-name>Ret</servlet-name>
-     <servlet-class>servlets.ReturnServlet</servlet-class>
+     <servlet-class>servlets.StatusServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>

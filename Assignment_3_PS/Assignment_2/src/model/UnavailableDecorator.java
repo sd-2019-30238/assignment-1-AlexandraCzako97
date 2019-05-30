@@ -6,8 +6,8 @@ import CQRS.ReadModel.FindBook;
 
 public class UnavailableDecorator extends Decorator{
 
-	public UnavailableDecorator(ITarget target) {
-		super(target);
+	public UnavailableDecorator() {
+		super();
 	}
 	
 	@Override

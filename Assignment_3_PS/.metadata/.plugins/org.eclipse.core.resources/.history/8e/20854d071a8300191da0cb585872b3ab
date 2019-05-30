@@ -4,10 +4,10 @@ import java.sql.SQLException;
 
 import CQRS.ReadModel.FindBook;
 
-public class OwnedDecorator extends Decorator{
+public class UnavailableDecorator extends Decorator{
 
-	public OwnedDecorator() {
-		super();
+	public UnavailableDecorator(ITarget target) {
+		super(target);
 	}
 	
 	@Override
@@ -18,13 +18,12 @@ public class OwnedDecorator extends Decorator{
 	private void changeBookStatus(String title) {
 		FindBook book=new FindBook();
 		try {
-			book.changeBookStatusToFree(title);
+			book.changeBookStatusToTaken(title);
 		} catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();
 		}
 		
 	}
-	
 
 }
